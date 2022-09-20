@@ -43,7 +43,7 @@ function ProductList() {
         <>
             <Container >
 
-                <Box sx={{ mt: 12, mb: 5, textAlign: "center" }}>
+                <Box sx={{ mt: 9, mb: 5, textAlign: "center" }}>
                     <SearchInput handleSubmit={handleSubmit} />
                 </Box>
 
