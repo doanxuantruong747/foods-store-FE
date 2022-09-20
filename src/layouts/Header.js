@@ -108,7 +108,7 @@ const Header = () => {
     );
 
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <IconButton edge="start" color="inherit" aria-label="menu"
@@ -160,11 +160,9 @@ const Header = () => {
                             sx={{ display: { xs: 'block', md: 'none' }, }}
                         >
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Home</Typography>
+                                <Typography textAlign="center">product</Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Sales</Typography>
-                            </MenuItem>
+
                         </Menu>
                     </Box>
 
@@ -186,11 +184,7 @@ const Header = () => {
 
                         <Button onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}>
-                            Home
-                        </Button>
-                        <Button onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            Sales
+                            product
                         </Button>
 
                     </Box>
