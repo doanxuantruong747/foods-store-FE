@@ -15,7 +15,7 @@ import { LoadingButton } from '@mui/lab';
 
 const infoSchema = Yup.object().shape({
   addressShiping: Yup.string().required("AddressShiping is required"),
-  phone: Yup.number().transform(value => (isNaN(value === 10) ? undefined : value)).required("Phone is required"),
+  phone: Yup.number().transform(value => (isNaN(value) ? undefined : value)).required("Phone is required"),
 
 });
 
