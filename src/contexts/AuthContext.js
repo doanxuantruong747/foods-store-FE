@@ -2,7 +2,7 @@
 import { createContext, useReducer, useEffect } from "react";
 import apiService from "../app/apiService";
 import { isValidToken } from "../untils/jwt"
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const initialState = {
     isInitialized: false,
@@ -47,17 +47,28 @@ const reducer = (state, action) => {
         case UPDATE_PROFILE:
             const {
                 name,
-                avatarUrl,
+                avataUrl,
                 address,
-
+                city,
+                country,
+                phone,
+                logoUrl,
+                shopName,
+                company,
             } = action.payload;
             return {
                 ...state,
                 user: {
                     ...state.user,
                     name,
-                    avatarUrl,
+                    avataUrl,
                     address,
+                    city,
+                    country,
+                    phone,
+                    logoUrl,
+                    shopName,
+                    company,
                 },
             };
         default:
@@ -79,7 +90,7 @@ const AuthContext = createContext({ ...initialState });
 
 function AuthProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    //const updatedProfile = useSelector((state) => state.user.updatedProfile);
+    const updatedProfile = useSelector((state) => state.user.updatedProfile);
 
     useEffect(() => {
         const initialize = async () => {
@@ -121,13 +132,14 @@ function AuthProvider({ children }) {
         initialize();
     }, []);
 
-    // useEffect(() => {
-    //     if (updatedProfile)
-    //         dispatch({ type: UPDATE_PROFILE, payload: updatedProfile });
-    // }, [updatedProfile]);
+    useEffect(() => {
+        if (updatedProfile)
+            dispatch({ type: UPDATE_PROFILE, payload: updatedProfile });
 
-    const login = async ({ email, password }, callback) => {
-        const response = await apiService.post("/auth/login", { email, password });
+    }, [updatedProfile]);
+
+    const login = async ({ email, password, buyer }, callback) => {
+        const response = await apiService.post("/auth/login", { email, password, buyer });
         const { user, accessTonken } = response.data;
 
         setSession(accessTonken);
@@ -139,8 +151,8 @@ function AuthProvider({ children }) {
         callback();
     };
 
-    const register = async ({ name, email, password }, callback) => {
-        const response = await apiService.post("/users", {
+    const registerBuyer = async ({ name, email, password }, callback) => {
+        const response = await apiService.post("/users/buyer", {
             name,
             email,
             password,
@@ -167,8 +179,9 @@ function AuthProvider({ children }) {
             value={{
                 ...state,
                 login,
-                register,
+                registerBuyer,
                 logout,
+                updatedProfile,
             }}
         >
             {children}

@@ -39,7 +39,6 @@ const slice = createSlice({
       state.orders = action.payload;
     },
 
-
   }
 });
 
@@ -57,7 +56,7 @@ export const createOder =
 
       dispatch(slice.actions.addOrderSuccess(response))
 
-      toast.success("Add Shopping Cart successfully");
+      toast.success("Order successfully");
 
     } catch (error) {
       dispatch(slice.actions.hasError(error.message))

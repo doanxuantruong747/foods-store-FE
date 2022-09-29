@@ -12,8 +12,9 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Avatar, Badge, Divider } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useNavigate } from "react-router-dom"
+import { Link as RouterLink, useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
+
 
 
 const Header = () => {
@@ -163,6 +164,15 @@ const Header = () => {
                                 <Typography textAlign="center">product</Typography>
                             </MenuItem>
 
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
+                                    <Typography textAlign="center">
+                                        Sales with me
+                                    </Typography>
+
+                                </RouterLink>
+                            </MenuItem>
+
                         </Menu>
                     </Box>
 
@@ -181,12 +191,17 @@ const Header = () => {
 
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
                         <Button onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}>
                             product
                         </Button>
 
+                        <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
+                            <Button
+                                sx={{ my: 2, color: 'white', display: 'block', }}>
+                                Sales with me
+                            </Button>
+                        </RouterLink>
                     </Box>
 
                     <Box>

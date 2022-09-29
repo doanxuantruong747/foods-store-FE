@@ -85,7 +85,7 @@ export const addShoppingCart =
 
       dispatch(slice.actions.addShoppingCartSuccess(response))
       dispatch(getShoppingCart(response))
-      toast.success("Add Shopping Cart successfully");
+
 
     } catch (error) {
       dispatch(slice.actions.hasError(error.message))
@@ -102,7 +102,7 @@ export const updateShoppingCart =
         amount
       })
       dispatch(getShoppingCart(response))
-      toast.success("Update Shopping Cart successfully");
+
 
     } catch (error) {
       dispatch(slice.actions.hasError(error.message))
@@ -116,7 +116,7 @@ export const deleteSingleCart =
 
       const response = await apiService.delete(`/carts/${id}`)
       dispatch(getShoppingCart(response))
-      toast.success("Delete Single Cart successfully");
+
 
     } catch (error) {
       dispatch(slice.actions.hasError(error.message))

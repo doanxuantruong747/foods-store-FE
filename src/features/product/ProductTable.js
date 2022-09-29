@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Table,
     TableHead,
@@ -6,48 +6,46 @@ import {
     TableRow,
     TableBody,
     TableCell,
-    Link,
     TableContainer,
     Box,
     IconButton,
-
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+//import { Link as RouterLink } from "react-router-dom";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import useAuth from "../../hooks/useAuth";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useDispatch } from "react-redux";
-import { deleteSingleCart, updateShoppingCart } from "./cartSlice";
 import { fNumber } from "../../untils/numberFormat";
+import { deleteProduct } from "./productSlice";
+import ProductEdit from "./ProductEdit";
 
 
-function CartsTable({ Carts }) {
+function ProductTable({ products }) {
+    const [open, setOpen] = useState(false);
+    const [productCurrent, setProductCurrent] = useState([]);
     const { user } = useAuth();
     const dispatch = useDispatch();
 
 
-    const handleClickIncrease = (id, amount) => {
-        amount += 1;
-        dispatch(updateShoppingCart(id, amount))
+    const handleDeleteProduct = (id) => {
+        if (user._id)
+            dispatch(deleteProduct(id))
     }
 
-    const handleClickDiminis = (id, amount) => {
-        amount -= 1;
-        if (amount === 0) { amount = 1 }
-        dispatch(updateShoppingCart(id, amount))
-    }
+    const handleClickOpen = (product) => {
+        setProductCurrent(product);
+        setOpen(true)
 
-    const handleDeleteCart = (id) => {
-        if (user)
-            dispatch(deleteSingleCart(id))
-    }
-
+    };
 
     return (
+
         //overflowX : tuy chinh khi mang hinh chieu ngang
-        <Box sx={{}}>
-            <TableContainer sx={{ minWidth: { sx: 320, md: 600 }, overflowX: "auto" }}>
+        <Box sx={{ mt: 5 }}>
+
+            <ProductEdit productCurrent={productCurrent} setOpen={setOpen} open={open} />
+
+            <TableContainer sx={{ minWidth: { sx: 320, md: 650 }, overflowX: "auto" }}>
                 <Table>
                     <TableHead >
                         <TableRow >
@@ -57,32 +55,41 @@ function CartsTable({ Carts }) {
                                 Product
                             </TableCell>
                             <TableCell sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }}>
+                                foods
+                            </TableCell>
+                            <TableCell sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }}>
                                 Price
                             </TableCell>
                             <TableCell sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }}>
-                                Amount
+                                priceSale
                             </TableCell>
-                            <TableCell
-                                sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }}
-                            >
+                            <TableCell sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }}>
+                                unit
+                            </TableCell>
+                            <TableCell sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }}>
+                                Edit
+                            </TableCell>
+                            <TableCell sx={{ width: { xs: "10%", md: "25%" }, fontWeight: 600 }} >
                                 Delete
                             </TableCell>
                         </TableRow>
                     </TableHead>
+
                     <TableBody>
-                        {Carts.map((cart) => {
-                            const { productName, price, _id } = cart.productId
-                            const image = cart.productId.image[0]
+
+                        {products.map((product) => {
+                            const { productName, foods, price, priceSale, unit, _id } = product
+                            const image = product.image[0]
                             return (
-                                <TableRow key={cart._id} hover >
+
+                                <TableRow key={product._id}  >
+
                                     <TableCell sx={{ alignItems: "center" }}>
                                         <Avatar
                                             alt={productName}
                                             src={image}
                                             sx={{ mr: -3, mb: 1 }}
-
                                         />
-
                                     </TableCell>
                                     <TableCell
                                         sx={{
@@ -90,16 +97,14 @@ function CartsTable({ Carts }) {
                                             alignItems: "center",
                                             cursor: "pointer",
                                         }}
-                                    >
+                                    > {productName}
+                                    </TableCell>
 
-                                        <Link
-                                            variant="subtitle2"
-                                            sx={{ fontWeight: 600 }}
-                                            component={RouterLink}
-                                            to={`/products/${_id}`}
-                                        >
-                                            {productName}
-                                        </Link>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ display: { xs: "10%", md: "20%" } }}
+                                    >
+                                        {foods}
                                     </TableCell>
 
                                     <TableCell
@@ -111,13 +116,29 @@ function CartsTable({ Carts }) {
 
                                     <TableCell
                                         align="left"
+                                        sx={{ display: { xs: "10%", md: "20%", color: "red" } }}
+                                    >
+                                        {fNumber(priceSale)}đ
+                                    </TableCell>
+
+                                    <TableCell
+                                        align="left"
                                         sx={{ display: { xs: "15%", md: "20%" } }}
                                     >
-                                        <Box sx={{ display: { xs: "flex", alignItems: "center" } }}>
-                                            <IconButton size="small" onClick={() => { handleClickDiminis(cart._id, cart.amount) }}> <RemoveCircleIcon size="small" /></IconButton>
-                                            {cart.amount}
-                                            <IconButton size="small" onClick={() => { handleClickIncrease(cart._id, cart.amount) }}><AddCircleIcon size="small" /></IconButton>
-                                        </Box>
+                                        {unit}
+                                    </TableCell>
+
+
+                                    <TableCell
+                                        align="left"
+                                        sx={{ display: { xs: "15", md: "20%" } }}
+                                    >
+
+                                        <IconButton onClick={() => { handleClickOpen(product) }}
+                                            aria-label="edit" size="small">
+                                            <BorderColorIcon fontSize="small" />
+
+                                        </IconButton>
 
                                     </TableCell>
 
@@ -125,7 +146,9 @@ function CartsTable({ Carts }) {
                                         align="left"
                                         sx={{ display: { xs: "15", md: "20%" } }}
                                     >
-                                        <IconButton onClick={() => { handleDeleteCart(cart._id) }}
+                                        <IconButton onClick={() => {
+                                            handleDeleteProduct(_id)
+                                        }}
                                             aria-label="delete" size="small">
                                             <DeleteOutlineIcon fontSize="small" />
                                         </IconButton>
@@ -133,13 +156,18 @@ function CartsTable({ Carts }) {
 
 
                                 </TableRow>
+
+
+
                             );
                         })}
+
                     </TableBody>
+
                 </Table>
             </TableContainer>
         </Box >
     );
 }
 
-export default CartsTable;
+export default ProductTable;

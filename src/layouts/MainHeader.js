@@ -15,11 +15,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { useDispatch, useSelector } from "react-redux";
 import { getShoppingCart } from "../features/cart/cartSlice";
-import { useNavigate } from "react-router-dom"
+import { Link as RouterLink, useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import DraggableDialog from "../components/dialog/Dialog"
 import { getOrders } from "../features/order/orderSlice";
-
 
 
 
@@ -32,13 +31,14 @@ const MainHeader = () => {
 
     const [open, setOpen] = useState(false);
 
-    const { user, logout } = useAuth();
+    let { user, logout } = useAuth();
 
     const navigate = useNavigate()
 
     const handleClickOpen = () => {
 
         setOpen(true);
+        handleMenuClose();
     };
 
 
@@ -60,6 +60,7 @@ const MainHeader = () => {
     const { orders } = useSelector((state) => state.order)
 
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(getShoppingCart(page))
@@ -98,6 +99,7 @@ const MainHeader = () => {
         if (carts.length !== 0 && carts.totalItem !== 0) { navigate("/cart") } else { alert('Cart without any products') }
     }
 
+
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
@@ -123,13 +125,23 @@ const MainHeader = () => {
             </Box>
 
             <Divider sx={{ borderStyle: "dashed" }} />
+
+            <MenuItem
+                onClick={handleMenuClose}
+                to="/account"
+                component={RouterLink}
+                sx={{ mx: 1 }}
+            >
+                Account Settings
+            </MenuItem>
+
             <DraggableDialog setOpen={setOpen} open={open} />
             {
                 (orders.length)
-                    ? (<MenuItem onClick={() => { navigate("/order") }}>
+                    ? (<MenuItem sx={{ mx: 1 }} onClick={() => { navigate("/order"); handleMenuClose() }}>
                         My order
                     </MenuItem>)
-                    : (<MenuItem onClick={handleClickOpen}>
+                    : (<MenuItem sx={{ mx: 1 }} onClick={handleClickOpen}>
                         My order
                     </MenuItem>)
             }
@@ -162,13 +174,10 @@ const MainHeader = () => {
                     <Typography variant="h6" noWrap component="a"
                         href="/"
                         sx={{
-                            mr: 15,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.02rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
+                            mr: 15, display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace', fontWeight: 700,
+                            letterSpacing: '.02rem', color: 'inherit',
+                            textDecoration: 'none'
                         }}
                     >
                         STORE FOOD
@@ -176,12 +185,10 @@ const MainHeader = () => {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
-                            size="large"
+                            size="large" color="inherit"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
+                            aria-controls="menu-appbar" aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
@@ -203,33 +210,34 @@ const MainHeader = () => {
                             sx={{ display: { xs: 'block', md: 'none' }, }}
                         >
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Home</Typography>
+                                <Typography textAlign="center">Product</Typography>
+                            </MenuItem>
+
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
+                                    <Typography textAlign="center">
+                                        Sales with me
+                                    </Typography>
+
+                                </RouterLink>
                             </MenuItem>
 
                         </Menu>
                     </Box>
 
-                    <Typography variant="h5" noWrap component="a" href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-
-                    </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-                        <Button onClick={() => { navigate("/") }}
+                        <Button
+                            href="/"
                             sx={{ my: 2, color: 'white', display: 'block' }}>
                             Product
                         </Button>
 
+                        <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
+                            <Button
+                                sx={{ my: 2, color: 'white', display: 'block', }}>
+                                Sales with me
+                            </Button>
+                        </RouterLink>
                     </Box>
 
                     <Box>
@@ -247,7 +255,8 @@ const MainHeader = () => {
                             </Typography>
                             <Box sx={{ flexFlow: 1 }} />
                             <Box>
-                                <Avatar
+                                <Avatar src={user.avataUrl}
+                                    alt={user.name}
                                     onClick={handleProfileMenuOpen}
                                 />
                             </Box>

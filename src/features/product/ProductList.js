@@ -15,21 +15,21 @@ function ProductList() {
     const [page, setPage] = useState(1);
 
 
-    const { currentPageProducts, productById, isLoading } = useSelector((state) => state.product)
+    const { currentPageProducts, productById, isLoading, totalProduct } = useSelector((state) => state.product)
 
-    const products = currentPageProducts.map((product) => productById[product]);
+    let products = currentPageProducts.map((product) => productById[product]);
 
     const { sliderShows } = useSelector((state) => state.slider)
     const dispatch = useDispatch();
 
     const handleSubmit = (searchQuery) => {
-        setFilterName(searchQuery.trim());
+        setPage(1);
+        setFilterName(searchQuery);
     };
 
     useEffect((name) => {
         name = filterName
         dispatch(getProducts({ page, name }));
-
 
     }, [page, filterName, dispatch]);
 
@@ -37,17 +37,26 @@ function ProductList() {
         dispatch(getSlider({ page }));
     }, [page, dispatch]);
 
-    console.log(products)
-
     return (
         <>
-            <Container >
+            {/* <Box sx={{
+                mt: 8, mb: 5, textAlign: "center",
+                position: "fixed",
+                zIndex: 1, width: "100%", height: 80,
+                backgroundColor: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }}>
+                <SearchInput handleSubmit={handleSubmit} />
+            </Box> */}
+            <Container sx={{ mt: 12, mb: 15, textAlign: "center" }}>
 
-                <Box sx={{ mt: 12, mb: 5, textAlign: "center" }}>
+                <Box sx={{ mb: 5 }}>
                     <SearchInput handleSubmit={handleSubmit} />
                 </Box>
 
-                <Box>
+                <Box sx={{ mb: 5 }}>
                     <Slideshow sliderShows={sliderShows}></Slideshow>
                 </Box>
 
@@ -65,15 +74,19 @@ function ProductList() {
                     ))}
                 </Grid>
                 <Box sx={{ mt: 5, display: "flex", justifyContent: "center" }}>
+                    {totalProduct ?
+                        (<LoadingButton
+                            variant="outlined"
+                            size="small"
+                            loading={isLoading}
+                            onClick={() => setPage((page) => page + 1)}
+                            disabled={Boolean(totalProduct) && products.length >= totalProduct}
+                        >
+                            Load more
+                        </LoadingButton>)
+                        : (<Typography variant="h6">No Products Yet</Typography>)
+                    }
 
-                    <LoadingButton
-                        variant="outlined"
-                        size="small"
-                        loading={isLoading}
-                        onClick={() => setPage((page) => page + 1)}
-                    >
-                        Load more
-                    </LoadingButton>
                 </Box>
 
                 <Box sx={{ mb: 10 }}></Box>

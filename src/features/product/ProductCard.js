@@ -18,15 +18,16 @@ function ProductCard({ product }) {
     const img = product.image[0]
     return (
 
-        <Card onClick={() => navigate(`/products/${product._id}`)}>
-            <CardActionArea>
+        <Card onClick={() => navigate(`/products/${product._id}`)} sx={{ fontSize: { xs: 10 } }}>
+            <CardActionArea >
                 <CardMedia
+                    sx={{ height: { xs: 130, md: 200, lg: 200 } }}
                     component="img"
                     height="200"
                     image={img}
                     alt="green iguana"
                 />
-                <CardContent>
+                <CardContent sx={{ height: { xs: 90 } }}>
                     <Typography gutterBottom variant="body1" component="div" noWrap >
                         {product.productName}
                     </Typography>

@@ -9,7 +9,7 @@ function SearchInput({ handleSubmit }) {
     const onSubmit = (e) => {
         e.preventDefault();
         handleSubmit(searchQuery);
-        setSearchQuery("");
+
     };
 
     return (
@@ -18,7 +18,7 @@ function SearchInput({ handleSubmit }) {
                 value={searchQuery}
                 placeholder="Search by name"
                 onChange={(event) => setSearchQuery(event.target.value)}
-                sx={{ minWidth: { sx: "auto", md: 600 } }}
+                sx={{ minWidth: { sx: "auto", md: 500 } }}
                 size="small"
                 InputProps={{
                     endAdornment: (

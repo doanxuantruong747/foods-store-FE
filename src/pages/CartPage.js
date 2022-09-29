@@ -14,8 +14,6 @@ function CartPage() {
     const navigate = useNavigate()
 
     let { carts, page } = useSelector((state) => state.cart)
-    console.log(carts
-    )
 
     useEffect(() => {
         if (user) dispatch(getShoppingCart(page))

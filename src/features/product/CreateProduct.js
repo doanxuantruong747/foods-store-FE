@@ -1,0 +1,167 @@
+import React, { useCallback } from 'react';
+import { FormProvider, FSelect, FTextField, FUploadImage } from "../../components/form"
+
+import { useDispatch, useSelector } from "react-redux";
+import { LoadingButton } from "@mui/lab";
+import { useForm } from "react-hook-form";
+import { fData } from "../../untils/numberFormat";
+
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Card, Grid, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { getProductsCurrentUser, createProduct, getProducts } from './productSlice';
+import useAuth from "../../hooks/useAuth";
+
+
+const CreateProductSchema = yup.object().shape({
+    productName: yup.string().required("productName is required"),
+    foods: yup.string().required("foods is required"),
+    price: yup.number().required("price is required"),
+    unit: yup.string().required("unit is required"),
+    describe: yup.string().required("describe is required"),
+});
+
+const defaultValues = {
+    productName: "",
+    foods: "",
+    price: null,
+    priceSale: null,
+    unit: "",
+    rating: "",
+    image: null,
+    describe: "",
+}
+
+function CreateProduct() {
+    const { isLoading } = useSelector((state) => state.product);
+
+    const { user } = useAuth();
+
+    const methods = useForm({
+        resolver: yupResolver(CreateProductSchema),
+        defaultValues,
+    });
+
+    const { handleSubmit,
+        setValue,
+        formState: { isSubmitting },
+    } = methods;
+
+    const dispatch = useDispatch();
+
+    const handleDrop = useCallback(
+        (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            if (file) {
+                setValue(
+                    "image",
+                    Object.assign(file, {
+                        preview: URL.createObjectURL(file),
+                    })
+                );
+            }
+        },
+        [setValue]
+    );
+
+    const onSubmit = (data) => {
+        const { productName, foods, price, priceSale, unit, rating, describe,
+            image } = data
+        const page = 1
+
+        dispatch(createProduct({
+            productName, foods, price, priceSale, unit, rating, describe,
+            image
+        }));
+        dispatch(getProductsCurrentUser({ id: user._id, page }));
+        dispatch(getProducts({ page }))
+
+    };
+    return (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                    <Card sx={{ py: 10, px: 3, textAlign: "center" }}>
+                        <FUploadImage
+                            name="image"
+                            accept="image/*"
+                            maxSize={3145728}
+                            onDrop={handleDrop}
+                            helperText={
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        mt: 2,
+                                        mx: "auto",
+                                        display: "block",
+                                        textAlign: "center",
+                                        color: "text.secondary",
+                                    }}
+                                >
+                                    Allowed *.jpeg, *.jpg, *.png, *.gif
+                                    <br /> max size of {fData(3145728)}
+                                </Typography>
+                            }
+                        />
+                    </Card>
+                </Grid>
+
+                <Grid item xs={12} md={8}>
+                    <Card sx={{ p: 3 }}>
+                        <Box
+                            sx={{
+                                display: "grid",
+                                rowGap: 3,
+                                columnGap: 2,
+                                gridTemplateColumns: {
+                                    xs: "repeat(1, 1fr)",
+                                    sm: "repeat(2, 1fr)",
+                                },
+                            }}
+                        >
+                            <FTextField name="productName" label="Product Name" />
+                            <FSelect name="foods" label="Foods" size="small" sx={{ xs: 200, md: 300 }} >
+                                {[
+                                    { value: "", label: "" },
+                                    { value: "Processing", label: "Processing" },
+                                    { value: "Unprocessed", label: "Unprocessed" },
+                                    { value: "Vegetable", label: "Vegetable" },
+                                ].map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </FSelect>
+
+                            <FTextField name="price" label="Price" />
+                            <FTextField name="priceSale" label="Price Saler" />
+
+                            <FTextField name="unit" label="Unit" />
+                            <FTextField name="rating" label="Rating" />
+
+                        </Box>
+
+                        <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3, mb: 10 }}>
+
+                            <FTextField name="describe" multiline rows={4} label="describe" />
+
+                            <LoadingButton
+                                type="submit"
+                                variant="contained"
+                                loading={isSubmitting || isLoading}
+                            >
+                                Create Product
+                            </LoadingButton>
+                        </Stack>
+
+                    </Card>
+
+                </Grid>
+                <Box sx={{ height: 15 }} />
+            </Grid>
+        </FormProvider>
+    );
+}
+
+export default CreateProduct;
