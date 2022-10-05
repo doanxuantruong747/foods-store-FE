@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Avatar, Badge, Divider } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link as RouterLink, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 
 
@@ -165,12 +165,9 @@ const Header = () => {
                             </MenuItem>
 
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
-                                    <Typography textAlign="center">
-                                        Sales with me
-                                    </Typography>
-
-                                </RouterLink>
+                                <Typography textAlign="center" onClick={() => { navigate("/sales") }}>
+                                    Sales with me
+                                </Typography>
                             </MenuItem>
 
                         </Menu>
@@ -196,12 +193,11 @@ const Header = () => {
                             product
                         </Button>
 
-                        <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
-                            <Button
-                                sx={{ my: 2, color: 'white', display: 'block', }}>
-                                Sales with me
-                            </Button>
-                        </RouterLink>
+                        <Button onClick={() => { navigate("/sales") }}
+                            sx={{ my: 2, color: 'white', display: 'block', }}>
+                            Sales with me
+                        </Button>
+
                     </Box>
 
                     <Box>

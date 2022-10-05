@@ -225,11 +225,9 @@ const MainHeader = ({ setThemes }) => {
                             </MenuItem>
 
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
-                                    <Typography textAlign="center">
-                                        Sales with me
-                                    </Typography>
-                                </RouterLink>
+                                <Typography textAlign="center" onClick={() => { navigate("/sales") }}>
+                                    Sales with me
+                                </Typography>
                             </MenuItem>
 
                         </Menu>
@@ -242,12 +240,11 @@ const MainHeader = ({ setThemes }) => {
                             Product
                         </Button>
 
-                        <RouterLink to="/sales" target="_blank" style={{ textDecoration: "none" }}>
-                            <Button
-                                sx={{ my: 2, color: 'white', display: 'block', }}>
-                                Sales with me
-                            </Button>
-                        </RouterLink>
+                        <Button onClick={() => { navigate("/sales") }}
+                            sx={{ my: 2, color: 'white', display: 'block', }}>
+                            Sales with me
+                        </Button>
+
                     </Box>
 
                     <Toolbar>
