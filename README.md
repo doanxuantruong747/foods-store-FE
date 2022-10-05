@@ -47,6 +47,9 @@ With this application website, you can sell your own food items
 - As a user, the role of a seller, I can update the status for my orders
 
 
+## Demo
+
+Links: https://foods-store-doan-xuan-truong.netlify.app/
 
 ### Users can view products displayed on the homepage
 ![](https://i.imgur.com/xYpRbB3.jpg)
