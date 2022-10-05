@@ -1,4 +1,5 @@
 function Tabs(theme) {
+
   return {
     MuiTab: {
       styleOverrides: {

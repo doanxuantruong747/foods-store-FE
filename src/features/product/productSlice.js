@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import apiService from "../../app/apiService";
 import { cloudinaryUpload } from "../../untils/cloudinary";
-import { PRODUCT_PER_PAGE } from "../../app/config";
+//import { PRODUCT_PER_PAGE } from "../../app/config";
 
 
 
@@ -199,7 +199,7 @@ export const deleteProduct =
       try {
         const response = await apiService.delete(`/products/${id}`);
         dispatch(slice.actions.deleteProductSuccess(response.data));
-        dispatch(getProductsCurrentUser())
+
         toast.error("delete success");
       } catch (error) {
         dispatch(slice.actions.hasError(error.message));

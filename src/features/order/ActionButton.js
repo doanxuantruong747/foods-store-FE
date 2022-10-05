@@ -20,6 +20,7 @@ function ActionButton({ status }) {
       sx={{ fontSize: "0.6rem", }}
       size="small"
       variant="contained"
+      color="secondary"
     >
       Shipping to you
     </Button>

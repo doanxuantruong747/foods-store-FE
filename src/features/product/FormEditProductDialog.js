@@ -18,6 +18,7 @@ const UpdateProductSchema = yup.object().shape({
     productName: yup.string().required("productName is required"),
     foods: yup.string().required("foods is required"),
     price: yup.number().required("price is required"),
+    priceSale: yup.number().required("priceSale is required"),
     unit: yup.string().required("unit is required"),
     describe: yup.string().required("describe is required"),
 });
@@ -31,8 +32,8 @@ export default function FormEditProductDialog({ product, handleClose }) {
     const defaultValues = {
         productName: product?.productName || "",
         foods: product?.foods || "",
-        price: product?.price || "",
-        priceSale: product?.priceSale || "",
+        price: product?.price || null,
+        priceSale: product?.priceSale || null,
         unit: product?.unit || "",
         image: product?.image?.[0] || null,
         describe: product?.describe || "",
@@ -69,7 +70,10 @@ export default function FormEditProductDialog({ product, handleClose }) {
     const onSubmit = (data) => {
         const page = 1
         dispatch(EditProduct({ id, ...data, }));
-        dispatch(getProductsCurrentUser({ id: user._id, page }))
+        setTimeout(() => {
+            dispatch(getProductsCurrentUser({ id: user._id, page }))
+        }, 500);
+
     };
 
     return (
@@ -140,7 +144,7 @@ export default function FormEditProductDialog({ product, handleClose }) {
 
                 <Button onClick={handleClose}>Cancel</Button>
             </Box>
-        </FormProvider >
+        </FormProvider>
 
 
 

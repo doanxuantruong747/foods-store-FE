@@ -1,79 +1,68 @@
 # Student: Doan Xuan Truong
 # StoreFood - Website
 
-This is an online food store application. Specializing in providing fresh and fresh food, helping people to have a busy time to go to the market online to buy food quickly
-
 ## User Stories
 
+### Background
+
+This is an online food store application. Specializing in providing fresh and fresh food, helping people to have a busy time to go to the market online to buy food quickly.
+
+With this application website, you can sell your own food items
+
+
+
 ### Authentication
-- As a user, I can register a new account with my name, email and password
-- As a user, I can log in with my email and password.
+- As a user, i can sign in, with my email and password
+- As a user, i can register for a new account, email, password
+- As a user, i can stay signed in with refreshing page
 
 
 ### Users
 
-- Users can view products displayed on the homepage.
-- Users can search products by product name
-- Users must log in, to view and any product for more information and price ....
-- Users can add products to buy in the cart
-- Users can buy the product immediately without adding to the cart
-- Users can see the number of products in their shopping cart 
-- In your cart, users can choose to buy or not buy products
-- In your cart, users can choose or reduce the number of products
-- Users can see their orders after choosing the product
-- Users confirm their orders for the store to deliver them in the shortest time
+- As a user, the role is a buyer, I can see the user's profile
+- As a user, the role is a buyer, I can update my profile into Avatar, Name, Phone, address, City, Country
+- As a user,the role of a seller, I can see my profile
+- As a user, the role of a seller, I can update my profile logo, shopname, company, phone, address.
 
-# Student: Doan Xuan Truong
-# StoreFood - Website
+### Product
 
-This is an online food store application. Specializing in providing fresh and fresh food, helping people to have a busy time to go to the market online to buy food quickly
+- As a user the role is a buyer, I can see a list of all products
+- As a user the role is a buyer, I can see the search function according to the product name
+- As a user, the role of a buyer, I can see the details of a product
+- As a user, the role of a seller, I can see the list of products I am selling
+- As a user, the role of a seller, I can add new products
+- As a user, the role of a seller, I can update the information of a product I am selling
+- As a user, the role of a seller, I can delete my product
 
-## User Stories
+### Cart
+- As a user, the role of a buyer, I can add products to the cart
+- As a user, the role of a buyer, I can see the list of products in the cart
+- As a user, the role of a buyer, I can add or reduce the number of products in the cart
+- As a user, the role of a buyer, I can delete the product that does not want to buy in the cart
 
-### Authentication
-- As a user, I can register a new account with my name, email and password
-- As a user, I can log in with my email and password.
+### Order
+- As a user, the role of a buyer, I can order an order to my address and phone number
+- As a user, the role of a buyer, I can see the list of my order
+- As a user, the role of a seller, I can see the list of orders I have sold.
+- As a user, the role of a seller, I can update the status for my orders
 
 
-### Users
-
-- Users can view products displayed on the homepage.
-- Users can search products by product name
-- Users must log in, to view and any product for more information and price ....
-- Users can add products to buy in the cart
-- Users can buy the product immediately without adding to the cart
-- Users can see the number of products in their shopping cart 
-- In your cart, users can choose to buy or not buy products
-- In your cart, users can choose or reduce the number of products
-- Users can see their orders after choosing the product
-- Users confirm their orders for the store to deliver them in the shortest time
 
 ### Users can view products displayed on the homepage
-![](https://i.imgur.com/TR4Tgdn.jpg)
+![](https://i.imgur.com/xYpRbB3.jpg)
 
-### Users can search products by product name
-![](https://i.imgur.com/m2uBxRU.jpg)
 
 ### View and any product for more information and price ....
-![](https://i.imgur.com/3XGCEkc.png)
+
+![](https://i.imgur.com/23JNmuB.jpg)
+
+### View Page Sale with me
+
+
+![](https://i.imgur.com/5PqZhzu.jpg)
 
 
 
-### Users can add products to buy in the cart
-![](https://i.imgur.com/wfYKZlN.png)
+### Login / Register
 
-
-
-### In your cart, users can choose to buy or not buy products
-![](https://i.imgur.com/mmvTLqy.png)
-
-
-### - Users can see their orders after choosing the product
-![](https://i.imgur.com/DHsC7N2.png)
-
-
-### Login
-![](https://i.imgur.com/bE7m2xe.png)
-
-### Register
-![](https://i.imgur.com/530eFOn.png)
+![](https://i.imgur.com/fw9vFxH.jpg)

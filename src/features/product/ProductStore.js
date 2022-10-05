@@ -41,7 +41,7 @@ function ProductStore() {
     return (
         //overflowX : tuy chinh khi mang hinh chieu ngang
         <Container>
-            <Typography variant="h5" sx={{ mt: 5, mb: 3 }}>
+            <Typography variant="h5" sx={{ fontSize: { xs: 16, md: 28 }, fontWeight: 600, mb: 2 }}>
                 My Product
             </Typography>
             <Card sx={{ p: 3 }}>

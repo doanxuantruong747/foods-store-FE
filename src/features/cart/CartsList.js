@@ -22,14 +22,14 @@ function CartsList({ carts }) {
                     p: 3, mb: 3,
                     mr: { xs: 0, md: 2 }
                 }}>
-                    <Typography variant="h4" sx={{ mb: 3 }}>
+                    <Typography variant="h4" sx={{ mb: 3, fontSize: { xs: 20 }, fontWeight: 600 }}>
                         Cart
                     </Typography>
                     <CartsTable Carts={Carts} />
                 </Card>
 
                 <Card sx={{ p: 3, mb: 3 }}>
-                    <Typography variant="h4" sx={{ mb: 3 }}>
+                    <Typography variant="h4" sx={{ mb: 3, fontSize: { xs: 20 }, fontWeight: 600 }}>
                         Order
                     </Typography>
                     <CartOrder carts={carts} />
@@ -37,7 +37,7 @@ function CartsList({ carts }) {
 
             </Grid>
 
-        </Container >
+        </Container>
     );
 }
 

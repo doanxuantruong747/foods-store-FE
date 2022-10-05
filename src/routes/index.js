@@ -13,19 +13,19 @@ import OrderPage from "../pages/OrderPage";
 import RegisterPage from "../pages/RegisterPage";
 import SalesPage from "../pages/SalesPage";
 import AuthRequire from "./AuthRequire";
-//import useAuth from "../hooks/useAuth"
 
-function Router() {
-    //const { user } = useAuth();
+
+function Router({ setThemes }) {
+
     return (
         <Routes>
             <Route>
-                <Route path="/" element={<MainLayout />}>
+                <Route path="/" element={<MainLayout setThemes={setThemes} />}>
                     <Route index element={<HomePage />} />
                 </Route>
             </Route>
 
-            <Route path="/" element={<AuthRequire> <MainLayout /> </AuthRequire>}>
+            <Route path="/" element={<AuthRequire> <MainLayout setThemes={setThemes} /> </AuthRequire>}>
                 <Route index element={<HomePage />} />
                 <Route path="products/:id" element={<DetailPage />} />
                 <Route path="/cart" element={<CartPage />} />

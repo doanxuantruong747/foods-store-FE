@@ -80,6 +80,11 @@ function CreateProduct() {
     };
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <Box sx={{ p: 3, mr: 1 }}>
+                <Typography variant="h5" sx={{ fontSize: { xs: 16, md: 28 }, fontWeight: 600 }} >
+                    Add Product
+                </Typography>
+            </Box>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
                     <Card sx={{ py: 10, px: 3, textAlign: "center" }}>
@@ -108,7 +113,7 @@ function CreateProduct() {
                 </Grid>
 
                 <Grid item xs={12} md={8}>
-                    <Card sx={{ p: 3 }}>
+                    <Card sx={{ p: 3, }}>
                         <Box
                             sx={{
                                 display: "grid",
@@ -158,8 +163,9 @@ function CreateProduct() {
                     </Card>
 
                 </Grid>
-                <Box sx={{ height: 15 }} />
+
             </Grid>
+            <Box sx={{ height: 15 }} />
         </FormProvider>
     );
 }

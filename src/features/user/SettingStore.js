@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../untils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUserProfile, getUser, updateUserSellerProfile } from "./userSlice";
+import { getCurrentUserProfile, updateUserSellerProfile } from "./userSlice";
 
 
 
@@ -70,7 +70,10 @@ function SettingStore() {
     };
 
     return (
-        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} >
+            <Typography variant="h5" sx={{ fontSize: { xs: 16, md: 28 }, fontWeight: 600, mb: 2 }} >
+                Setting Store
+            </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
                     <Card sx={{ py: 10, px: 3, textAlign: "center" }}>

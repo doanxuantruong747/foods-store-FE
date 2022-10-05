@@ -24,7 +24,7 @@ function Slideshow({ sliderShows }) {
             () =>
                 setIndex((prevIndex) =>
                     prevIndex === sliderShows.length - 1 ? 0 : prevIndex + 1
-                ), 4000
+                ), 5000
         );
         return () => {
             resetTimeout();

@@ -6,13 +6,17 @@ import useAuth from "../hooks/useAuth";
 import Header from "./Header";
 import AlertMsg from "../components/alertMsg/AlertMsg";
 
+const bgGreen = {
+    bgColorLight: "#f1f8e9",
+    bgColorDark: "#0a1929",
+}
 
-function MainLayout() {
+function MainLayout({ setThemes }) {
     const { user } = useAuth();
     return (
-        <Stack sx={{ minHeight: "100vh" }}>
+        <Stack sx={{ minHeight: "100vh", backgroundColor: bgGreen.bgColorLight }}>
             {user
-                ? (<MainHeader />)
+                ? (<MainHeader setThemes={setThemes} />)
                 : (<Header />)
             }
             <AlertMsg />

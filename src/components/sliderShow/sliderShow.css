@@ -8,7 +8,7 @@
 
 .slideshowSlider {
     white-space: nowrap;
-    transition: ease 1ms;
+    transition: ease 2ms;
 }
 
 .slide {
@@ -32,11 +32,11 @@
     cursor: pointer;
     margin: 10px 7px 0px;
 
-    background-color: #c4c4c4;
+    background-color: #c4c4c4
 }
 
 .slideshowDot.active {
-    background-color: #2e7d32;
+    background-color: #ffff
 }
 
 /* Nếu cửa sổ trình duyệt có kích thước 600px trở xuống */

@@ -50,7 +50,7 @@ function ProductList() {
             }}>
                 <SearchInput handleSubmit={handleSubmit} />
             </Box> */}
-            <Container sx={{ mt: 12, mb: 15, textAlign: "center" }}>
+            <Container sx={{ mt: 12, mb: 15, textAlign: "center", }}>
 
                 <Box sx={{ mb: 5 }}>
                     <SearchInput handleSubmit={handleSubmit} />

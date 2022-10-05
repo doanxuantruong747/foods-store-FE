@@ -39,12 +39,11 @@ function CartOrder({ carts }) {
 
   Carts.map((item) => {
     products = [...products, {
-      name: item.productId.productName,
-      price: item.productId.price,
+      product: item.productId._id,
       amount: item.amount,
       sum: (item.productId.price) * (item.amount),
-      sellerId: item.productId.author,
-      cartId: item._id
+      cartId: item._id,
+      sellerId: item.productId.author
     }];
     sum = (item.productId.price) * (item.amount);
     totalSum += sum;

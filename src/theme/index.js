@@ -4,32 +4,21 @@ import {
     createTheme,
     ThemeProvider as MUIThemeProvider,
 } from "@mui/material/styles";
+
+
 import customizeComponents from "./customizations";
 
-const PRIMARY = {
-    lighter: "#C8FACD",
-    light: "#5BE584",
-    main: "#00AB55",
-    dark: "#007B55",
-    darker: "#005249",
+const SUCCESSBADGE = {
+    lighter: "#cddc39",
+    light: "#03a9f4",
+    main: "#039be5",
+    dark: "#0288d1",
+    darker: "#0277bd",
     contrastText: "#FFF",
 };
-const SECONDARY = {
-    lighter: "#D6E4FF",
-    light: "#84A9FF",
-    main: "#3366FF",
-    dark: "#1939B7",
-    darker: "#091A7A",
-    contrastText: "#FFF",
-};
-const SUCCESS = {
-    lighter: "#a5d6a7",
-    light: "#43a047",
-    main: "#388e3c",
-    dark: "#2e7d32",
-    darker: "#1b5e20",
-    contrastText: "#FFF",
-};
+
+
+
 
 const GREY = {
     0: "#FFFFFF",
@@ -53,12 +42,15 @@ const GREY = {
 };
 
 
-function ThemeProvider({ children }) {
+function ThemeProvider({ children, themes }) {
+
+
     const themeOptions = {
         palette: {
-            primary: SUCCESS,
-            secondary: SECONDARY,
-            success: PRIMARY,
+            primary: themes,
+            // secondary: SECONDARY,
+            // success: SUCCESS,
+            badge: SUCCESSBADGE,
 
             text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
             background: { paper: "#fff", default: "#fff", neutral: GREY[200] },
@@ -81,10 +73,13 @@ function ThemeProvider({ children }) {
     theme.components = customizeComponents(theme)
 
     return (
-        <MUIThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
-        </MUIThemeProvider>
+        <>
+
+            <MUIThemeProvider theme={theme}>
+                <CssBaseline />
+                {children}
+            </MUIThemeProvider>
+        </>
     )
 }
 

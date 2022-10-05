@@ -19,15 +19,22 @@ import { Link as RouterLink, useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import DraggableDialog from "../components/dialog/Dialog"
 import { getOrders } from "../features/order/orderSlice";
+import ThemeChanging from "../components/themeChanging/ThemeChanging";
+import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
 
 
 
 
-const MainHeader = () => {
+
+
+
+const MainHeader = ({ setThemes }) => {
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorThemeChang, setAnchorThemeChang] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
+    const isMenuOpenChang = Boolean(anchorThemeChang);
 
     const [open, setOpen] = useState(false);
 
@@ -36,18 +43,24 @@ const MainHeader = () => {
     const navigate = useNavigate()
 
     const handleClickOpen = () => {
-
         setOpen(true);
         handleMenuClose();
     };
 
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+
+    const handleChangThemeMenuOpen = (event) => {
+        setAnchorThemeChang(event.currentTarget);
+    };
+    const handleMenuChangThemeClose = () => {
+        setAnchorThemeChang(null);
+    };
+
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -102,6 +115,8 @@ const MainHeader = () => {
 
     const renderMenu = (
         <Menu
+            open={isMenuOpen}
+            onClose={handleMenuClose}
             anchorEl={anchorEl}
             anchorOrigin={{
                 vertical: "bottom",
@@ -112,8 +127,6 @@ const MainHeader = () => {
                 vertical: "top",
                 horizontal: "right",
             }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
         >
             <Box sx={{ my: 1.5, px: 2.5 }}>
                 <Typography variant="subtitle2" noWrap>
@@ -146,7 +159,6 @@ const MainHeader = () => {
                     </MenuItem>)
             }
 
-
             <Divider sx={{ borderStyle: "dashed" }} />
 
             {(!user)
@@ -155,7 +167,6 @@ const MainHeader = () => {
                 </MenuItem>)
                 : (<MenuItem onClick={handleLogout} sx={{ m: 1 }}>
                     Logout
-
                 </MenuItem>)
             }
 
@@ -163,7 +174,8 @@ const MainHeader = () => {
     );
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="fixed" >
+
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <IconButton edge="start" color="inherit" aria-label="menu"
@@ -172,7 +184,6 @@ const MainHeader = () => {
                         <Logo />
                     </IconButton>
                     <Typography variant="h6" noWrap component="a"
-                        href="/"
                         sx={{
                             mr: 15, display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace', fontWeight: 700,
@@ -218,7 +229,6 @@ const MainHeader = () => {
                                     <Typography textAlign="center">
                                         Sales with me
                                     </Typography>
-
                                 </RouterLink>
                             </MenuItem>
 
@@ -227,7 +237,7 @@ const MainHeader = () => {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Button
-                            href="/"
+                            onClick={() => { navigate("/") }}
                             sx={{ my: 2, color: 'white', display: 'block' }}>
                             Product
                         </Button>
@@ -240,36 +250,24 @@ const MainHeader = () => {
                         </RouterLink>
                     </Box>
 
-                    <Box>
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{ mr: 2 }}
-                            >
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Toolbar>
+                        <Box>
+                            <Avatar sx={{ cursor: 'pointer' }}
+                                src={user.avataUrl}
+                                alt={user.name}
+                                onClick={handleProfileMenuOpen}
+                            />
+                        </Box>
+                        {renderMenu}
+                    </Toolbar>
 
-                            </Typography>
-                            <Box sx={{ flexFlow: 1 }} />
-                            <Box>
-                                <Avatar src={user.avataUrl}
-                                    alt={user.name}
-                                    onClick={handleProfileMenuOpen}
-                                />
-                            </Box>
-                            {renderMenu}
-                        </Toolbar>
-                    </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{}}>
                         {user ? (
                             <IconButton onClick={handelCart} to="/cart" aria-label="Show cart items" color="inherit">
                                 <Badge
                                     badgeContent={carts.totalItem}
-                                    color="secondary">
+                                    color="badge">
                                     <ShoppingCartIcon />
                                 </Badge>
                             </IconButton>)
@@ -277,13 +275,26 @@ const MainHeader = () => {
                             : (<IconButton onClick={handelCart} aria-label="Show cart items" color="inherit">
                                 <Badge
 
-                                    color="secondary">
+                                    color="badge">
                                     <ShoppingCartIcon />
                                 </Badge>
                             </IconButton>)
                         }
                     </Box>
+                    <Toolbar>
 
+                        <Brightness6OutlinedIcon
+                            onClick={handleChangThemeMenuOpen}
+                            sx={{ color: "white", cursor: 'pointer' }}
+                        />
+
+                        <ThemeChanging setThemes={setThemes}
+                            handleMenuChangThemeClose={handleMenuChangThemeClose}
+                            isMenuOpenChang={isMenuOpenChang}
+                            anchorThemeChang={anchorThemeChang}
+                        />
+
+                    </Toolbar>
                 </Toolbar>
             </Container>
         </AppBar>

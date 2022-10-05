@@ -43,39 +43,39 @@ function HomeSalesPage() {
   const SALES_PROFILE_TABS = [
     {
       value: "store",
-      icon: <StorefrontIcon sx={{ fontSize: 24 }} />,
+      icon: <StorefrontIcon sx={{ fontSize: { xs: 18, md: 24 } }} />,
       component: <ProductStore />,
     },
     {
       value: "add_product",
-      icon: <AddCardIcon sx={{ fontSize: 24 }} />,
+      icon: <AddCardIcon sx={{ fontSize: { xs: 18, md: 24 } }} />,
       component: <CreateProduct />,
     },
     {
       value: "order",
-      icon: <ListAltIcon sx={{ fontSize: 24 }} />,
+      icon: <ListAltIcon sx={{ fontSize: { xs: 18, md: 24 } }} />,
       component: <OrderStore />,
     },
     {
       value: "setting_store",
-      icon: <SettingsSuggestIcon sx={{ fontSize: 24 }} />,
+      icon: <SettingsSuggestIcon sx={{ fontSize: { xs: 18, md: 24 } }} />,
       component: <SettingStore user={user} />
     },
   ];
 
   return (
-    <Container>
+    <Container >
       <Card
         sx={{
           mb: 3,
-          height: 280,
+          height: { xs: 150, md: 280 },
           position: "relative",
         }}
       >
         <ProfileCover />
 
         <TabsWrapperStyle>
-          <Tabs
+          <Tabs sx={{ fontSize: { xs: 5 } }}
             value={currentTab}
             scrollButtons="auto"
             variant="scrollable"
