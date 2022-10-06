@@ -26,8 +26,6 @@ import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
 
 
 
-
-
 const MainHeader = ({ setThemes }) => {
 
     const [anchorElNav, setAnchorElNav] = useState(null);

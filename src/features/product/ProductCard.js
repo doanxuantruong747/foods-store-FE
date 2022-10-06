@@ -27,8 +27,8 @@ function ProductCard({ product }) {
                     image={img}
                     alt="green iguana"
                 />
-                <CardContent sx={{ height: { xs: 90 } }}>
-                    <Typography gutterBottom variant="body1" component="div" noWrap >
+                <CardContent sx={{ height: { xs: 90 }, mt: { xs: -2 } }}>
+                    <Typography gutterBottom variant="body1" component="div" noWrap sx={{ fontSize: { xs: 12 } }}>
                         {product.productName}
                     </Typography>
                     <Stack
@@ -36,16 +36,17 @@ function ProductCard({ product }) {
                         spacing={0.5}
                         alignItems="center"
                         justifyContent="flex-end"
+
                     >
                         {product.priceSale && (
                             <Typography
                                 component="span"
-                                sx={{ color: "text.disabled", textDecoration: "line-through" }}
+                                sx={{ color: "text.disabled", textDecoration: "line-through", fontSize: { xs: 13 } }}
                             >
                                 {fNumber(product.priceSale)}
                             </Typography>
                         )}
-                        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 600, fontSize: { xs: 13 } }}>
                             {fNumber(product.price)} đ
                         </Typography>
                     </Stack>
