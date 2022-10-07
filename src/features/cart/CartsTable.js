@@ -21,7 +21,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useDispatch } from "react-redux";
 import { deleteSingleCart, updateShoppingCart } from "./cartSlice";
 import { fNumber } from "../../untils/numberFormat";
-import { FTextField, FormProvider } from "../../components/form";
+import { FormProvider } from "../../components/form";
 
 
 function CartsTable({ cartCount, setCartCount }) {
