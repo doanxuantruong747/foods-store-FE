@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
     Card,
     Grid,
@@ -24,8 +24,11 @@ import { getSingleProducts } from './productSlice'
 import { addShoppingCart } from "../cart/cartSlice";
 import { useNavigate } from "react-router-dom"
 import { fNumber } from "../../untils/numberFormat";
+import DialogCantBy from "../../components/dialog/DialogCantBy";
+import useAuth from "../../hooks/useAuth";
 
 function ProductDetail() {
+    const [open, setOpen] = useState(false);
 
     const { selectedProduct, isLoading, error } = useSelector((state) => state.product)
 
@@ -33,6 +36,7 @@ function ProductDetail() {
     const params = useParams();
     const id = params.id
     const navigate = useNavigate()
+    let { user } = useAuth();
 
     useEffect(() => {
         dispatch(getSingleProducts(id));
@@ -48,13 +52,16 @@ function ProductDetail() {
         setTimeout(() => {
             navigate("/cart")
         }, 700);
-
     }
 
+    const handleClickOpen = () => {
+        setOpen(true)
+    };
 
     return (
         <>
             <Container sx={{ my: 3, height: 500 }}>
+                {<DialogCantBy open={open} setOpen={setOpen} />}
                 <Breadcrumbs aria-label="breadcrumb" sx={{ mt: 15, mb: 4 }}>
                     <Link underline="hover" color="inherit" component={RouterLink} to="/">
                         Store Food
@@ -130,13 +137,17 @@ function ProductDetail() {
                                                                 textDecoration: "line-through",
                                                             }}
                                                         >
-                                                            {selectedProduct.priceSale && fNumber(selectedProduct.priceSale)}
+                                                            {selectedProduct.priceSale && fNumber(selectedProduct.priceSale)}đ
                                                         </Box>
                                                         &nbsp;{fNumber(selectedProduct.price)}đ
                                                     </Typography>
 
-                                                    <Typography variant="h5" sx={{ mb: 3 }}>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
                                                         Unit: {selectedProduct.unit}
+                                                    </Typography>
+
+                                                    <Typography variant="h5" sx={{ mb: 3 }}>
+                                                        Shop: {selectedProduct.author.shopName}
                                                     </Typography>
 
                                                     <Typography >
@@ -145,12 +156,21 @@ function ProductDetail() {
 
                                                     <Stack direction="row" spacing={2} sx={{ mt: 5 }}>
                                                         <Button variant="outlined" startIcon={<ShoppingCartIcon />}
-                                                            onClick={handleOrderNow}>
+                                                            onClick={() => {
+                                                                (user._id === selectedProduct.author._id)
+                                                                    ? handleClickOpen()
+                                                                    : handleOrderNow()
+                                                            }}>
                                                             Order now
                                                         </Button>
 
                                                         <Button variant="contained" startIcon={<AddShoppingCartIcon />}
-                                                            onClick={handleAddToCart}>
+                                                            onClick={() => {
+                                                                (user._id === selectedProduct.author._id)
+                                                                    ? handleClickOpen()
+                                                                    : handleAddToCart()
+                                                            }}
+                                                        >
                                                             Add Shopping Cart
                                                         </Button>
 

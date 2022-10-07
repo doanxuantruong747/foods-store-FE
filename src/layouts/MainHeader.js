@@ -83,7 +83,6 @@ const MainHeader = ({ setThemes }) => {
     }, [dispatch, page, user])
 
 
-
     const handleLogin = async () => {
         try {
             handleCloseNavMenu();
