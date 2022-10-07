@@ -11,6 +11,7 @@ import {
     Box,
     IconButton,
 
+
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -20,21 +21,34 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useDispatch } from "react-redux";
 import { deleteSingleCart, updateShoppingCart } from "./cartSlice";
 import { fNumber } from "../../untils/numberFormat";
+import { FTextField, FormProvider } from "../../components/form";
 
 
-function CartsTable({ Carts }) {
+function CartsTable({ cartCount, setCartCount }) {
     const { user } = useAuth();
     const dispatch = useDispatch();
 
-
-    const handleClickIncrease = (id, amount) => {
+    const handleClickIncrement = (id, amount) => {
+        setCartCount(
+            cartCount.map((item) =>
+                id === item._id
+                    ? { ...item, amount: item.amount + 1 }
+                    : item
+            )
+        )
         amount += 1;
         dispatch(updateShoppingCart(id, amount))
     }
 
-    const handleClickDiminis = (id, amount) => {
-        amount -= 1;
-        if (amount === 0) { amount = 1 }
+    const handleClickDecrement = (id, amount) => {
+        setCartCount(
+            cartCount.map((item) =>
+                id === item._id
+                    ? { ...item, amount: item.amount - (item.amount > 1 ? 1 : 0) }
+                    : item
+            )
+        )
+        amount -= (amount > 1 ? 1 : 0);
         dispatch(updateShoppingCart(id, amount))
     }
 
@@ -70,7 +84,7 @@ function CartsTable({ Carts }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {Carts.map((cart) => {
+                        {cartCount.map((cart) => {
                             const { productName, price, _id } = cart.productId
                             const image = cart.productId.image[0]
                             return (
@@ -114,9 +128,15 @@ function CartsTable({ Carts }) {
                                         sx={{ display: { xs: "15%", md: "20%" } }}
                                     >
                                         <Box sx={{ display: { xs: "flex", alignItems: "center" } }}>
-                                            <IconButton size="small" onClick={() => { handleClickDiminis(cart._id, cart.amount) }}> <RemoveCircleIcon size="small" /></IconButton>
-                                            {cart.amount}
-                                            <IconButton size="small" onClick={() => { handleClickIncrease(cart._id, cart.amount) }}><AddCircleIcon size="small" /></IconButton>
+                                            <IconButton size="small" onClick={() => { handleClickDecrement(cart._id, cart.amount) }}> <RemoveCircleIcon size="small" /></IconButton>
+                                            <FormProvider>
+                                                {cart.amount}
+                                            </FormProvider>
+
+
+
+
+                                            <IconButton size="small" onClick={() => { handleClickIncrement(cart._id, cart.amount) }}><AddCircleIcon size="small" /></IconButton>
                                         </Box>
 
                                     </TableCell>
@@ -138,7 +158,7 @@ function CartsTable({ Carts }) {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Box >
+        </Box>
     );
 }
 

@@ -24,11 +24,11 @@ const defaultValues = {
   phone: ""
 }
 
-function CartOrder({ carts }) {
+function CartOrder({ cartCount }) {
   const { user } = useAuth();
 
   const navigate = useNavigate()
-  let Carts = carts.Carts
+  let Carts = cartCount
 
   const userName = Carts[0].author.name
 

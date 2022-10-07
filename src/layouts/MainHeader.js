@@ -105,6 +105,8 @@ const MainHeader = ({ setThemes }) => {
         }
     }
 
+
+
     const handelCart = () => {
         if (carts.length !== 0 && carts.totalItem !== 0) { navigate("/cart") } else { alert('Cart without any products') }
     }

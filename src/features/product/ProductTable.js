@@ -166,7 +166,7 @@ function ProductTable({ products }) {
 
                 </Table>
             </TableContainer>
-        </Box >
+        </Box>
     );
 }
 
