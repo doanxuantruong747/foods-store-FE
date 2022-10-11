@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Table,
     TableHead,
@@ -11,7 +11,6 @@ import {
     Box,
     IconButton,
 
-
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -21,34 +20,45 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useDispatch } from "react-redux";
 import { deleteSingleCart, updateShoppingCart } from "./cartSlice";
 import { fNumber } from "../../untils/numberFormat";
-import { FormProvider } from "../../components/form";
+
+
 
 
 function CartsTable({ cartCount, setCartCount }) {
+    const [amountInput, setAmountInput] = useState(false)
+
     const { user } = useAuth();
     const dispatch = useDispatch();
 
+
     const handleClickIncrement = (id, amount) => {
+        setAmountInput(false)
         setCartCount(
             cartCount.map((item) =>
+
                 id === item._id
                     ? { ...item, amount: item.amount + 1 }
+
                     : item
             )
         )
         amount += 1;
+
         dispatch(updateShoppingCart(id, amount))
     }
 
     const handleClickDecrement = (id, amount) => {
+        setAmountInput(false)
         setCartCount(
             cartCount.map((item) =>
                 id === item._id
                     ? { ...item, amount: item.amount - (item.amount > 1 ? 1 : 0) }
+
                     : item
             )
         )
         amount -= (amount > 1 ? 1 : 0);
+
         dispatch(updateShoppingCart(id, amount))
     }
 
@@ -58,8 +68,14 @@ function CartsTable({ cartCount, setCartCount }) {
     }
 
 
+    const handleChange = (e, id) => {
+        let amount = e.target.value
+
+        dispatch(updateShoppingCart(id, amount))
+    }
+
     return (
-        //overflowX : tuy chinh khi mang hinh chieu ngang
+
         <Box sx={{}}>
             <TableContainer sx={{ minWidth: { sx: 320, md: 600 }, overflowX: "auto" }}>
                 <Table>
@@ -129,12 +145,28 @@ function CartsTable({ cartCount, setCartCount }) {
                                     >
                                         <Box sx={{ display: { xs: "flex", alignItems: "center" } }}>
                                             <IconButton size="small" onClick={() => { handleClickDecrement(cart._id, cart.amount) }}> <RemoveCircleIcon size="small" /></IconButton>
-                                            <FormProvider>
-                                                {cart.amount}
-                                            </FormProvider>
 
 
+                                            {/* <FormProvider methods={methods} onSubmit={handleSubmit(handleChange)}> */}
+                                            <Box onClick={() => { setAmountInput(true) }}>
+                                                {amountInput === false
 
+                                                    ? (<input style={{ textAlign: "center", width: "40px", height: "27px", borderRadius: "5px" }}
+                                                        type="text"
+                                                        name="amount"
+                                                        id={cart._id}
+                                                        value={cart.amount}
+                                                    />)
+                                                    : (<input style={{ textAlign: "center", width: "40px", height: "27px", borderRadius: "5px" }}
+                                                        type="text"
+                                                        onChange={(e) => { handleChange(e, cart._id) }}
+                                                        name="amount"
+                                                        id={cart._id}
+                                                    />)
+                                                }
+                                            </Box>
+
+                                            {/* </FormProvider> */}
 
                                             <IconButton size="small" onClick={() => { handleClickIncrement(cart._id, cart.amount) }}><AddCircleIcon size="small" /></IconButton>
                                         </Box>
@@ -145,7 +177,7 @@ function CartsTable({ cartCount, setCartCount }) {
                                         align="left"
                                         sx={{ display: { xs: "15", md: "20%" } }}
                                     >
-                                        <IconButton onClick={() => { handleDeleteCart(cart._id) }}
+                                        <IconButton onClick={(e) => { handleDeleteCart(cart._id) }}
                                             aria-label="delete" size="small">
                                             <DeleteOutlineIcon fontSize="small" />
                                         </IconButton>
@@ -158,7 +190,8 @@ function CartsTable({ cartCount, setCartCount }) {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Box>
+        </Box >
+
     );
 }
 

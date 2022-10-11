@@ -51,7 +51,7 @@ function ProductDetail() {
         handleAddToCart()
         setTimeout(() => {
             navigate("/cart")
-        }, 700);
+        }, 1000);
     }
 
     const handleClickOpen = () => {

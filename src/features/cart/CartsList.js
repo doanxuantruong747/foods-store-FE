@@ -2,13 +2,18 @@
 import { Card, Container, Grid, Typography } from "@mui/material";
 import CartsTable from './CartsTable';
 import CartOrder from './CartOrder';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function CartsList({ carts }) {
 
     const Carts = carts.Carts
     const [cartCount, setCartCount] = useState(Carts)
+
+    useEffect(() => {
+        setCartCount(carts.Carts)
+    }, [carts.Carts])
+
 
     return (
 
