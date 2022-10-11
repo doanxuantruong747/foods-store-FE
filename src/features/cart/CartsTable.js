@@ -38,7 +38,6 @@ function CartsTable({ cartCount, setCartCount }) {
 
                 id === item._id
                     ? { ...item, amount: item.amount + 1 }
-
                     : item
             )
         )
@@ -53,11 +52,18 @@ function CartsTable({ cartCount, setCartCount }) {
             cartCount.map((item) =>
                 id === item._id
                     ? { ...item, amount: item.amount - (item.amount > 1 ? 1 : 0) }
-
                     : item
             )
         )
         amount -= (amount > 1 ? 1 : 0);
+
+        dispatch(updateShoppingCart(id, amount))
+    }
+
+    const handleChange = (e, id) => {
+        if (e.target.value > 20)
+            e.target.value = 20
+        const amount = e.target.value
 
         dispatch(updateShoppingCart(id, amount))
     }
@@ -67,12 +73,6 @@ function CartsTable({ cartCount, setCartCount }) {
             dispatch(deleteSingleCart(id))
     }
 
-
-    const handleChange = (e, id) => {
-        let amount = e.target.value
-
-        dispatch(updateShoppingCart(id, amount))
-    }
 
     return (
 

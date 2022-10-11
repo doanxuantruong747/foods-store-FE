@@ -219,7 +219,11 @@ const MainHeader = ({ setThemes }) => {
                             onClose={handleCloseNavMenu}
                             sx={{ display: { xs: 'block', md: 'none' }, }}
                         >
-                            <MenuItem onClick={handleCloseNavMenu}>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate("/");
+                                    handleCloseNavMenu();
+                                }}>
                                 <Typography textAlign="center">Product</Typography>
                             </MenuItem>
 
