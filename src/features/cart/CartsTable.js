@@ -63,6 +63,7 @@ function CartsTable({ cartCount, setCartCount }) {
     const handleChange = (e, id) => {
         if (e.target.value > 20)
             e.target.value = 20
+
         const amount = e.target.value
 
         dispatch(updateShoppingCart(id, amount))

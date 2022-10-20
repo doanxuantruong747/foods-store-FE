@@ -22,6 +22,7 @@ function Router({ setThemes }) {
             <Route>
                 <Route path="/" element={<MainLayout setThemes={setThemes} />}>
                     <Route index element={<HomePage />} />
+                    <Route path="products/:id" element={<DetailPage />} />
                 </Route>
             </Route>
 

@@ -64,17 +64,17 @@ function OrderList({ orders }) {
 
                                             <Typography sx={{ fontSize: 13, mb: 1, fontWeight: 600, display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
                                                 <span>Price:</span>
-                                                <span style={{ color: "red" }}>{fNumber(product.product.price)} đ </span>
+                                                <span>{fNumber(product.product.price)} đ </span>
                                             </Typography>
 
                                             <Typography sx={{ fontSize: 13, mb: 1, fontWeight: 600, display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
                                                 <span>Amount:</span>
-                                                <span style={{ color: "red" }}>{product.amount}</span>
+                                                <span >{product.amount}</span>
                                             </Typography>
 
                                             <Typography sx={{ fontSize: 13, mb: 1, fontWeight: 600, display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
                                                 <span>Sum:</span>
-                                                <span style={{ color: "red" }}>{fNumber(product.sum)} đ</span>
+                                                <span >{fNumber(product.sum)} đ</span>
                                             </Typography>
 
                                             <Divider sx={{ borderStyle: "dashed", mb: 2 }} />
@@ -85,13 +85,13 @@ function OrderList({ orders }) {
 
                                     <Typography sx={{ fontSize: 13, mb: 1, fontWeight: 600, display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
                                         <span>priceShiping:</span>
-                                        <span style={{ color: "red" }}>{fNumber(order.priceShiping)} đ</span>
+                                        <span >{fNumber(order.priceShiping)} đ</span>
                                     </Typography>
 
                                     <Divider sx={{ mb: 2 }} />
 
 
-                                    <Typography sx={{ fontSize: 18, mb: 1, fontWeight: 600, display: "flex", justifyContent: "space-between", flexDirection: "row", color: "red" }}>
+                                    <Typography sx={{ fontSize: 18, mb: 1, fontWeight: 600, display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
                                         <span>Total:</span>
                                         <span >{fNumber(order.total)} đ</span>
                                     </Typography>

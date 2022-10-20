@@ -160,7 +160,7 @@ const Header = () => {
                             onClose={handleCloseNavMenu}
                             sx={{ display: { xs: 'block', md: 'none' }, }}
                         >
-                            <MenuItem onClick={handleCloseNavMenu}>
+                            <MenuItem onClick={() => { navigate("/"); handleCloseNavMenu() }}>
                                 <Typography textAlign="center">product</Typography>
                             </MenuItem>
 
@@ -188,7 +188,7 @@ const Header = () => {
 
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button onClick={handleCloseNavMenu}
+                        <Button onClick={() => { navigate("/") }}
                             sx={{ my: 2, color: 'white', display: 'block' }}>
                             product
                         </Button>

@@ -44,20 +44,23 @@ function ProductDetail() {
 
 
     const handleAddToCart = () => {
+        if (!user) { navigate("/login") }
         dispatch(addShoppingCart({ productId: id }));
     };
 
     const handleOrderNow = () => {
+
         handleAddToCart()
         setTimeout(() => {
             navigate("/cart")
         }, 1000);
+
     }
 
     const handleClickOpen = () => {
         setOpen(true)
     };
-
+    console.log(user);
     return (
         <>
             <Container sx={{ my: 3, height: 500 }}>
@@ -157,18 +160,27 @@ function ProductDetail() {
                                                     <Stack direction="row" spacing={2} sx={{ mt: 5 }}>
                                                         <Button variant="outlined" startIcon={<ShoppingCartIcon />}
                                                             onClick={() => {
-                                                                (user._id === selectedProduct.author._id)
-                                                                    ? handleClickOpen()
-                                                                    : handleOrderNow()
+                                                                if (!user) {
+                                                                    navigate("/login")
+                                                                } else {
+                                                                    (user._id === selectedProduct.author._id)
+                                                                        ? handleClickOpen()
+                                                                        : handleOrderNow()
+                                                                }
+
                                                             }}>
                                                             Order now
                                                         </Button>
 
                                                         <Button variant="contained" startIcon={<AddShoppingCartIcon />}
                                                             onClick={() => {
-                                                                (user._id === selectedProduct.author._id)
-                                                                    ? handleClickOpen()
-                                                                    : handleAddToCart()
+                                                                if (!user) {
+                                                                    navigate("/login")
+                                                                } else {
+                                                                    (user._id === selectedProduct.author._id)
+                                                                        ? handleClickOpen()
+                                                                        : handleAddToCart()
+                                                                }
                                                             }}
                                                         >
                                                             Add Shopping Cart
