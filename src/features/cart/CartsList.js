@@ -3,6 +3,7 @@ import { Card, Container, Grid, Typography } from "@mui/material";
 import CartsTable from './CartsTable';
 import CartOrder from './CartOrder';
 import { useEffect, useState } from "react";
+import { Box } from "@mui/system";
 
 
 function CartsList({ carts }) {
@@ -45,6 +46,7 @@ function CartsList({ carts }) {
 
             </Grid>
 
+            <Box sx={{ mb: 15 }} />
         </Container>
     );
 }
