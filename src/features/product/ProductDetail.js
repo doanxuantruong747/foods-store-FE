@@ -32,6 +32,9 @@ function ProductDetail() {
 
     const { selectedProduct, isLoading, error } = useSelector((state) => state.product)
 
+    const [img, setImg] = useState('');
+    const [border, setBorder] = useState();
+
     const dispatch = useDispatch();
     const params = useParams();
     const id = params.id
@@ -60,7 +63,12 @@ function ProductDetail() {
     const handleClickOpen = () => {
         setOpen(true)
     };
-    console.log(user);
+
+    const handleClickImage = (image, index) => {
+        setImg(image)
+        setBorder(index)
+    }
+
     return (
         <Container sx={{ my: 3 }}>
             {<DialogCantBy open={open} setOpen={setOpen} />}
@@ -84,16 +92,43 @@ function ProductDetail() {
                                         <Grid container>
                                             <Grid item xs={12} md={6}>
                                                 <Box p={2}>
-                                                    <Box sx={{ borderRadius: 2, overflow: "hidden", display: "flex", }}>
+                                                    <Box sx={{
+                                                        width: { xs: 280, md: 350, lg: 460 },
+                                                        height: { xs: 280, md: 350, lg: 460 },
+                                                        borderRadius: 2,
+                                                        overflow: "hidden",
+                                                        display: "flex",
+                                                    }}>
                                                         <Box
                                                             component="img"
-                                                            sx={{
-                                                                width: 1,
-                                                                height: 1,
-                                                            }}
-                                                            src={selectedProduct.image[0]}
+                                                            src={!img
+                                                                ? (selectedProduct.image[0])
+                                                                : (img)
+                                                            }
                                                             alt="product"
                                                         />
+                                                    </Box>
+                                                    <Box >
+                                                        {selectedProduct.image.map((img, index) => (
+
+                                                            index === border
+
+                                                                ? (<Box
+                                                                    onClick={() => { handleClickImage(img, index) }}
+                                                                    component="img"
+                                                                    sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 1, border: '1px solid green', }}
+                                                                    src={img}
+                                                                    alt="product"
+                                                                />)
+                                                                : (<Box
+                                                                    onClick={() => { handleClickImage(img, index) }}
+                                                                    component="img"
+                                                                    sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 1 }}
+                                                                    src={img}
+                                                                    alt="product"
+                                                                />)
+                                                        ))
+                                                        }
                                                     </Box>
                                                 </Box>
                                             </Grid>
@@ -102,7 +137,7 @@ function ProductDetail() {
                                                 <Typography
                                                     variant="h6"
                                                     sx={{
-                                                        mt: 2, mb: 1, display: "block",
+                                                        mb: 1, display: "block",
                                                         textTransform: "uppercase",
                                                         color:
                                                             selectedProduct.status === "sale"
@@ -127,7 +162,6 @@ function ProductDetail() {
                                                     direction="row"
                                                     alignItems="center"
                                                     spacing={1}
-
                                                 >
                                                 </Stack>
                                                 <Divider sx={{ borderStyle: "dashed", mb: 2 }} />
@@ -186,7 +220,7 @@ function ProductDetail() {
                                                     </Button>
 
                                                 </Stack>
-                                                <Box sx={{ mb: 5 }}></Box>
+
                                             </Grid>
 
                                         </Grid>
