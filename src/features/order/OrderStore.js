@@ -9,7 +9,8 @@ import ActionButton from "./ActionButton";
 import { getOrdersSeller } from "./orderSlice"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import UpdateStatusOrder from "./UpdateStatusOrder";
-import SearchSelectBox from "../../components/searchSelectBox/SearchSelectBox";
+// import SearchSelectBox from "../../components/searchSelectBox/SearchSelectBox";
+import SearchFilter from "../../components/searchSelectBox/SearchFilter";
 
 
 
@@ -60,7 +61,7 @@ function OrderStore() {
             <Card>
                 <Box
                     sx={{ mt: 2, display: 'flex', justifyContent: 'space-around' }} >
-                    <SearchSelectBox handleSubmit={handleSubmit} />
+                    <SearchFilter handleSubmit={handleSubmit} />
 
                     <Pagination
                         count={Math.ceil(totalOrders / 10)}
