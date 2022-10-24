@@ -5,11 +5,10 @@
     margin: 0 auto;
     overflow: hidden;
     max-width: 100%;
-
 }
 
 .slideshowSlider {
-    z-index: 0;
+
     white-space: nowrap;
     transition: ease 2ms;
 }
@@ -18,12 +17,11 @@
     display: inline-block;
     height: 300px;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 0px;
 }
 
 
 .slideshowDots {
-    z-index: 1;
     text-align: center;
 }
 
@@ -32,10 +30,8 @@
     height: 10px;
     width: 10px;
     border-radius: 50%;
-
     cursor: pointer;
     margin: 10px 7px 0px;
-
     background-color: #c4c4c4
 }
 
@@ -48,13 +44,11 @@
 
     .slide {
         display: inline-block;
-        height: 200px;
-        border-radius: 15px;
+        height: 180px;
     }
 
     .slideshowDot {
         height: 7px;
         width: 7px;
-
     }
 }

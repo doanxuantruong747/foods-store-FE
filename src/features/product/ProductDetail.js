@@ -12,6 +12,7 @@ import {
     Link,
     Button,
     Rating,
+
 } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -72,7 +73,7 @@ function ProductDetail() {
     return (
         <Container sx={{ my: 3 }}>
             {<DialogCantBy open={open} setOpen={setOpen} />}
-            <Breadcrumbs aria-label="breadcrumb" sx={{ mt: 15, mb: 4 }}>
+            <Breadcrumbs aria-label="breadcrumb" sx={{ mt: { xs: 5, md: 10 }, mb: { xs: 1, md: 2 } }}>
                 <Link underline="hover" color="inherit" component={RouterLink} to="/">
                     Store Food
                 </Link>
@@ -93,13 +94,13 @@ function ProductDetail() {
                                             <Grid item xs={12} md={6}>
                                                 <Box p={2}>
                                                     <Box sx={{
-                                                        width: { xs: 280, md: 350, lg: 460 },
-                                                        height: { xs: 280, md: 350, lg: 460 },
-                                                        borderRadius: 2,
+                                                        width: { xs: 320, md: 350, lg: 460 },
+                                                        height: { xs: 320, md: 350, lg: 460 },
                                                         overflow: "hidden",
                                                         display: "flex",
-                                                    }}>
-                                                        <Box
+                                                    }}
+                                                    >
+                                                        <Card
                                                             component="img"
                                                             src={!img
                                                                 ? (selectedProduct.image[0])
@@ -108,35 +109,35 @@ function ProductDetail() {
                                                             alt="product"
                                                         />
                                                     </Box>
-                                                    <Box >
-                                                        {selectedProduct.image.map((img, index) => (
 
-                                                            index === border
+                                                    {selectedProduct.image.map((img, index) => (
 
-                                                                ? (<Box
-                                                                    onClick={() => { handleClickImage(img, index) }}
-                                                                    component="img"
-                                                                    sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 1, border: '1px solid blue', }}
-                                                                    src={img}
-                                                                    alt="product"
-                                                                />)
-                                                                : (<Box
-                                                                    onClick={() => { handleClickImage(img, index) }}
-                                                                    component="img"
-                                                                    sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 1 }}
-                                                                    src={img}
-                                                                    alt="product"
-                                                                />)
-                                                        ))
-                                                        }
-                                                    </Box>
+                                                        index === border
+
+                                                            ? (<Box
+                                                                onClick={() => { handleClickImage(img, index) }}
+                                                                component="img"
+                                                                sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 0.5, border: '1px solid blue', }}
+                                                                src={img}
+                                                                alt="product"
+                                                            />)
+                                                            : (<Box
+                                                                onClick={() => { handleClickImage(img, index) }}
+                                                                component="img"
+                                                                sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 0.5 }}
+                                                                src={img}
+                                                                alt="product"
+                                                            />)
+                                                    ))
+                                                    }
+
                                                 </Box>
                                             </Grid>
 
                                             <Grid item xs={12} md={6}>
                                                 <Typography
-                                                    variant="h6"
                                                     sx={{
+
                                                         mb: 1, display: "block",
                                                         textTransform: "uppercase",
                                                         color:
@@ -148,7 +149,12 @@ function ProductDetail() {
                                                     {selectedProduct.status}
                                                 </Typography>
 
-                                                <Typography variant="h5" paragraph>
+                                                <Typography
+                                                    sx={{
+                                                        font: { xs: 16, md: 23 },
+                                                        fontWeight: 600
+                                                    }}
+                                                >
                                                     {selectedProduct.productName}
                                                 </Typography>
 
@@ -165,7 +171,10 @@ function ProductDetail() {
                                                 >
                                                 </Stack>
                                                 <Divider sx={{ borderStyle: "dashed", mb: 2 }} />
-                                                <Typography variant="h5" sx={{ mb: 1, color: "red" }} > Price:
+                                                <Typography sx={{
+                                                    mb: 1, color: "red", font: { xs: 16, md: 23 },
+                                                    fontWeight: 600
+                                                }} > Price:
                                                     <Box
                                                         component="span"
                                                         sx={{
@@ -178,15 +187,21 @@ function ProductDetail() {
                                                     &nbsp;{fNumber(selectedProduct.price)}đ
                                                 </Typography>
 
-                                                <Typography variant="h5" sx={{ mb: 1 }}>
+                                                <Typography sx={{
+                                                    mb: 1, font: { xs: 16, md: 23 },
+                                                    fontWeight: 600
+                                                }}>
                                                     Unit: {selectedProduct.unit}
                                                 </Typography>
 
-                                                <Typography variant="h5" sx={{ mb: 3 }}>
+                                                <Typography sx={{
+                                                    mb: 3, font: { xs: 16, md: 23 },
+                                                    fontWeight: 600
+                                                }}>
                                                     Shop: {selectedProduct.author.shopName}
                                                 </Typography>
 
-                                                <Typography >
+                                                <Typography sx={{ font: { xs: 16, md: 23 } }} >
                                                     {selectedProduct.describe}
                                                 </Typography>
 

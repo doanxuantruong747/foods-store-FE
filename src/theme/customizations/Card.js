@@ -4,7 +4,7 @@ function Card(theme) {
       styleOverrides: {
         root: {
           position: "relative",
-          borderRadius: Number(theme.shape.borderRadius) * 2,
+          borderRadius: Number(theme.shape.borderRadius) * 1,
           zIndex: 0, // Fix Safari overflow: hidden with border radius
         },
       },

@@ -38,7 +38,7 @@ function ProductList() {
     }, [page, dispatch]);
 
     return (
-        <>
+        <Box sx={{ mt: { xs: 9, md: 12 }, mb: 15, textAlign: "center", }}>
             {/* <Box sx={{
                 mt: 8, mb: 5, textAlign: "center",
                 position: "fixed",
@@ -50,15 +50,18 @@ function ProductList() {
             }}>
                 <SearchInput handleSubmit={handleSubmit} />
             </Box> */}
-            <Container sx={{ mt: 12, mb: 15, textAlign: "center", }}>
 
-                <Box sx={{ mb: 5 }}>
-                    <SearchInput handleSubmit={handleSubmit} />
-                </Box>
+            <Box sx={{ mb: { xs: 2, md: 5 } }}>
+                <SearchInput handleSubmit={handleSubmit} />
+            </Box>
 
-                <Box sx={{ mb: 5 }}>
+            <Box sx={{ mb: { xs: -1, md: 4 } }}>
+                <Container>
                     <Slideshow sliderShows={sliderShows}></Slideshow>
-                </Box>
+                </Container>
+
+            </Box>
+            <Container sx={{ mb: 15, textAlign: "center", }}>
 
                 {filterName
                     ? (<Typography sx={{ fontStyle: "italic" }}>Search by name: ({filterName} )</Typography>)
@@ -73,7 +76,7 @@ function ProductList() {
                         </Grid>
                     ))}
                 </Grid>
-                <Box sx={{ mt: 5, display: "flex", justifyContent: "center" }}>
+                <Box sx={{ mt: { xs: 2, md: 5 }, display: "flex", justifyContent: "center" }}>
                     {totalProduct ?
                         (<LoadingButton
                             variant="outlined"
@@ -93,7 +96,7 @@ function ProductList() {
 
 
             </Container>
-        </>
+        </Box>
     );
 }
 
