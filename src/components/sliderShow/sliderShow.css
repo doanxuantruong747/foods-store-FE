@@ -1,12 +1,14 @@
 /* Slideshow */
 
 .slideshow {
+    position: absolute;
     margin: 0 auto;
     overflow: hidden;
     max-width: 100%;
 }
 
 .slideshowSlider {
+    z-index: 0;
     white-space: nowrap;
     transition: ease 2ms;
 }
@@ -20,6 +22,7 @@
 
 
 .slideshowDots {
+    z-index: 1;
     text-align: center;
 }
 

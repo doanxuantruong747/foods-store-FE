@@ -116,7 +116,7 @@ function ProductDetail() {
                                                                 ? (<Box
                                                                     onClick={() => { handleClickImage(img, index) }}
                                                                     component="img"
-                                                                    sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 1, border: '1px solid green', }}
+                                                                    sx={{ width: 70, height: 70, ml: 1, mt: 2, borderRadius: 1, border: '1px solid blue', }}
                                                                     src={img}
                                                                     alt="product"
                                                                 />)

@@ -29,8 +29,8 @@ const SUCCESS = {
 
 
 function ThemeChanging({ anchorThemeChang, setThemes, handleMenuChangThemeClose, isMenuOpenChang }) {
-    const [green, setGreen] = useState("#f5f5f5")
-    const [Blue, setBlue] = useState("")
+    const [green, setGreen] = useState("")
+    const [Blue, setBlue] = useState("#f5f5f5")
     const [Pink, setPink] = useState("")
 
     return (
@@ -54,19 +54,6 @@ function ThemeChanging({ anchorThemeChang, setThemes, handleMenuChangThemeClose,
             <MenuItem
                 onClick={() => {
                     handleMenuChangThemeClose();
-                    setThemes(PRIMARY)
-                    setGreen("#f5f5f5")
-                    setBlue("")
-                    setPink("")
-                }}
-                sx={{ mx: 1, backgroundColor: green }}
-            >
-                Fresh Green
-            </MenuItem>
-
-            <MenuItem
-                onClick={() => {
-                    handleMenuChangThemeClose();
                     setThemes(SECONDARY);
                     setGreen("")
                     setBlue("#f5f5f5")
@@ -76,7 +63,18 @@ function ThemeChanging({ anchorThemeChang, setThemes, handleMenuChangThemeClose,
             >
                 Blue Sea
             </MenuItem>
-
+            <MenuItem
+                onClick={() => {
+                    handleMenuChangThemeClose();
+                    setThemes(PRIMARY)
+                    setGreen("#f5f5f5")
+                    setBlue("")
+                    setPink("")
+                }}
+                sx={{ mx: 1, backgroundColor: green }}
+            >
+                Fresh Green
+            </MenuItem>
             <MenuItem
                 onClick={() => {
                     handleMenuChangThemeClose();

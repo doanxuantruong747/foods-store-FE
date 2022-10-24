@@ -5,11 +5,11 @@ import Router from './routes'
 import ThemeProvider from './theme'
 
 const PRIMARY = {
-    lighter: "#a5d6a7",
-    light: "#43a047",
-    main: "#388e3c",
-    dark: "#2e7d32",
-    darker: "#1b5e20",
+    lighter: "#80deea",
+    light: "#00acc1",
+    main: "#0097a7",
+    dark: "#00838f",
+    darker: "#006064",
     contrastText: "#FFF",
 };
 
