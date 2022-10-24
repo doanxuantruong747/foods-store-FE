@@ -94,8 +94,8 @@ function ProductDetail() {
                                             <Grid item xs={12} md={6}>
                                                 <Box p={2}>
                                                     <Box sx={{
-                                                        width: { xs: 320, md: 350, lg: 460 },
-                                                        height: { xs: 320, md: 350, lg: 460 },
+                                                        width: { xs: 280, md: 350, lg: 460 },
+                                                        height: { xs: 280, md: 350, lg: 460 },
                                                         overflow: "hidden",
                                                         display: "flex",
                                                     }}
