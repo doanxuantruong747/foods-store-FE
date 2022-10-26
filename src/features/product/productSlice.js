@@ -15,6 +15,8 @@ const initialState = {
   selectedProduct: null,
   totalProduct: 0,
 
+  productsProminent: [],
+
   currentPageProductsUser: [],
   totalProductCurrent: 0,
 
@@ -45,6 +47,14 @@ const slice = createSlice({
       });
 
       state.totalProduct = count;
+    },
+
+    getProductProminentSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+
+      state.productsProminent = action.payload.Products;
+
     },
 
     getProductCurrentUserSuccess(state, action) {
@@ -136,6 +146,24 @@ export const getProducts =
       }
     };
 
+export const getProductsProminent =
+  ({ page = 1, limit = 12, name }) =>
+    async (dispatch) => {
+      dispatch(slice.actions.startLoading());
+      try {
+        const params = { page, name, limit };
+        if (name) params.name = name;
+
+        const response = await apiService.get(`/products/productsProminent`, { params });
+        if (page === 1) dispatch(slice.actions.resetProducts());
+        dispatch(slice.actions.getProductProminentSuccess(response.data));
+
+      } catch (error) {
+        dispatch(slice.actions.hasError(error.message));
+        toast.error(error.message);
+      }
+    };
+
 export const getProductsCurrentUser =
   ({ id, page, limit = 10, name }) =>
     async (dispatch) => {
@@ -200,7 +228,7 @@ export const deleteProduct =
         const response = await apiService.delete(`/products/${id}`);
         dispatch(slice.actions.deleteProductSuccess(response.data));
 
-        toast.error("delete success");
+        toast.success("delete success");
       } catch (error) {
         dispatch(slice.actions.hasError(error.message));
         toast.error(error.message);

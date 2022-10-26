@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
     Card,
     Stack,
@@ -13,9 +13,11 @@ import { fNumber } from "../../untils/numberFormat";
 
 
 
-function ProductCard({ product }) {
+function ProductCardProminent({ product }) {
+
     const navigate = useNavigate();
     const img = product.image[0]
+
     return (
 
         <Card onClick={() => navigate(`/products/${product._id}`)} sx={{ fontSize: { xs: 10 }, }}>
@@ -56,4 +58,4 @@ function ProductCard({ product }) {
     )
 }
 
-export default ProductCard
+export default ProductCardProminent

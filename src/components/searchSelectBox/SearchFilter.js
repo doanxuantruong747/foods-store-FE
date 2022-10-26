@@ -8,7 +8,6 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 function SearchFilter({ handleSubmit }) {
     const [searchQuery, setSearchQuery] = useState("");
-
     const onSubmit = (e) => {
         e.preventDefault();
         handleSubmit(searchQuery);
