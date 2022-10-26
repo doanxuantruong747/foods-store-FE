@@ -73,18 +73,22 @@ function ProductList() {
                     ? (<Typography sx={{ fontStyle: "italic" }}>Search by name: ({filterName} )</Typography>)
                     : (<Typography></Typography>)
                 }
-                <Box sx={{ mb: { xs: 3, md: 5 }, mt: { xs: 2 } }}>
-                    <Typography sx={{ textAlign: "left", fontSize: { xs: 16, md: 20 }, fontWeight: 500 }}>
-                        Product Prominent
-                    </Typography>
-                    <Grid container spacing={1} mt={0}>
-                        {productsProminent.map((product) => (
-                            <Grid key={product._id} item xs={6} md={4} lg={3}>
-                                <ProductCardProminent product={product} />
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box>
+                {!filterName
+                    ? (<Box sx={{ mb: { xs: 3, md: 5 }, mt: { xs: 2 } }}>
+                        <Typography sx={{ textAlign: "left", fontSize: { xs: 16, md: 20 }, fontWeight: 500 }}>
+                            Product Prominent
+                        </Typography>
+                        <Grid container spacing={1} mt={0}>
+                            {productsProminent.map((product) => (
+                                <Grid key={product._id} item xs={6} md={4} lg={3}>
+                                    <ProductCardProminent product={product} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Box>)
+                    : ""
+                }
+
                 <Box>
                     <Typography sx={{ textAlign: "left", fontSize: { xs: 16, md: 20 }, fontWeight: 500 }}>
                         Just For You
