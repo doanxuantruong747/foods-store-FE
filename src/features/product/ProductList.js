@@ -31,8 +31,8 @@ function ProductList() {
     };
 
     useEffect(() => {
-        dispatch(getSlider({ page }));
-    }, [page, dispatch]);
+        dispatch(getSlider({}));
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(getProductsProminent({}));
@@ -40,7 +40,9 @@ function ProductList() {
 
     useEffect((name) => {
         name = filterName
-        dispatch(getProducts({ page, name }));
+        setTimeout(() => {
+            dispatch(getProducts({ page, name }));
+        }, 700);
     }, [page, filterName, dispatch]);
 
     return (
