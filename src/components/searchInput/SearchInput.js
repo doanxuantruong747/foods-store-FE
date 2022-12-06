@@ -9,7 +9,6 @@ function SearchInput({ handleSubmit }) {
     const onSubmit = (e) => {
         e.preventDefault();
         handleSubmit(searchQuery);
-
     };
 
     return (

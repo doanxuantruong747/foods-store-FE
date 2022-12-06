@@ -8,10 +8,13 @@ import * as Yup from "yup";
 import { useNavigate, useLocation, Link as RouterLink } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 
-import { Container, Alert, Link, Stack, InputAdornment, IconButton } from '@mui/material';
+import { Container, Alert, Link, Stack, InputAdornment, IconButton, Button, Typography } from '@mui/material';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { LoadingButton } from '@mui/lab';
+
+import FacebookIcon from '@mui/icons-material/Facebook';
+import { Box } from '@mui/system';
 
 
 
@@ -57,6 +60,11 @@ function LoginPage() {
             reset();
             setError("responseError", error);
         }
+    };
+
+
+    const google = () => {
+        window.open("http://localhost:5500/api/auth/google", "_self");
     };
 
 
@@ -119,6 +127,38 @@ function LoginPage() {
                 >
                     Login
                 </LoadingButton>
+
+                <Typography sx={{ mt: 3, fontSize: 12 }}> Or Login With</Typography>
+
+                <Box sx={{ mt: 1, }}>
+                    <Button onClick={google}
+                        fullWidth
+                        size="large"
+                        variant="contained"
+                        sx={{ backgroundColor: "#FFF", }}>
+                        <img
+                            style={{ with: 20, height: 20 }}
+                            alt='google'
+                            src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png' />
+
+                    </Button>
+
+                </Box>
+                <Box sx={{ mt: 1, }}>
+                    <Box
+                        sx={{
+                            height: 40,
+                            backgroundColor: "#3b5998", cursor: "pointer",
+                            borderRadius: 1, display: "flex",
+                            flexDirection: 'row', justifyContent: 'center'
+                        }}>
+                        <FacebookIcon sx={{ color: "#fff", mt: 1 }} />
+                        <Typography sx={{ fontSize: 16, fontWeight: 600, color: "#fff", mt: 1 }}>Facebook</Typography>
+
+                    </Box>
+
+                </Box>
+
             </FormProvider>
         </Container>
     )
